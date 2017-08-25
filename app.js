@@ -18,13 +18,18 @@ function renderResult(result) {
   console.log(result)
   return `<li>
       <h3>${result.snippet.title}</h3>
-      <a href="https://www.youtube.com/watch?v=${result.id.videoId}">
-        <img src="${result.snippet.thumbnails.medium.url}" alt="${result.snippet.title}">
-      </a>
+      <p>
+        <a href="https://www.youtube.com/watch?v=${result.id.videoId}">
+          <img src="${result.snippet.thumbnails.medium.url}" alt="${result.snippet.title}">
+        </a>
+        <a href="https://www.youtube.com/channel/${result.snippet.channelId}">${result.snippet.channelTitle}</a><br>
+        ${result.snippet.description}
+      </p>
     </li>`
 }
 
 function displayYouTubeSearchData(data) {
+  $('.js-search-results').before('<h2>Results</h2>')
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
 }
