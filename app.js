@@ -11,7 +11,10 @@ function getDataFromAPI(searchTerm, callback) {
     type: 'video'
   }
 
-  $.getJSON(YOUTUBE_SEARCH_URL, params, callback)
+  $.getJSON(YOUTUBE_SEARCH_URL, params, function(data) {
+    callback(data)
+    addPagination(params, data)
+  })
 }
 
 function renderResult(result) {
@@ -28,15 +31,15 @@ function renderResult(result) {
     </li>`
 }
 
-function addPagination(data) {
-  console.log(data)
-  if (data.nextPageToken) {
-    $('.pagination').html(`<a href="?pageToken=${data.nextPageToken}">Next</a>`)
-  }
+function addPagination(params, data) {
+  console.log(data, params)
+  // if (data.nextPageToken) {
+  //   $('.pagination').html(`<a href="?pageToken=${data.nextPageToken}">Next</a>`)
+  // }
 }
 
 function displayYouTubeSearchData(data) {
-  addPagination(data)
+  // addPagination(data)
   $('.js-search-results').before('<h2>Results</h2>')
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
