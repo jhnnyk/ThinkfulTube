@@ -28,7 +28,15 @@ function renderResult(result) {
     </li>`
 }
 
+function addPagination(data) {
+  console.log(data)
+  if (data.nextPageToken) {
+    $('.pagination').html(`<a href="?pageToken=${data.nextPageToken}">Next</a>`)
+  }
+}
+
 function displayYouTubeSearchData(data) {
+  addPagination(data)
   $('.js-search-results').before('<h2>Results</h2>')
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
