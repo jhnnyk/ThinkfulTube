@@ -7,7 +7,8 @@ function getDataFromAPI(searchTerm, callback) {
   const params = {
     part: 'snippet',
     key: `${APIKey}`,
-    q: `${searchTerm}`
+    q: `${searchTerm}`,
+    type: 'video'
   }
 
   $.getJSON(YOUTUBE_SEARCH_URL, params, callback)
@@ -15,6 +16,17 @@ function getDataFromAPI(searchTerm, callback) {
 
 function renderResult(result) {
   console.log(result)
+  return `<li>
+      <h3>${result.snippet.title}</h3>
+      <a href="https://www.youtube.com/watch?v=${result.id.videoId}">
+        <img src="${result.snippet.thumbnails.medium.url}" alt="${result.snippet.title}">
+      </a>
+    </li>`
+}
+
+function displayYouTubeSearchData(data) {
+  const results = data.items.map((item, index) => renderResult(item))
+  $('.js-search-results').html(results)
 }
 
 function watchSubmit() {
@@ -26,7 +38,7 @@ function watchSubmit() {
     // reset the input
     queryTarget.val('')
 
-    getDataFromAPI(query, renderResult)
+    getDataFromAPI(query, displayYouTubeSearchData)
   })
 }
 
