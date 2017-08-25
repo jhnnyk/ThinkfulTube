@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', Sans-Serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: 'Slabo 13px', Serif;
+  font-size: 48px;
+  text-shadow: 0 0 4px white;
+  margin: 0 0 15px 0;
+}
+
+h2 {
+  font-family: 'Slabo 13px', Serif;
+  font-size: 36px;
+}
+
+h3 {
+  font-family: 'Slabo 13px', Serif;
+  font-size: 24px;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  background-color: #556B98;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+}
+
+main {
+  margin-top: 220px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  border-top: 2px solid #ccc;
+  padding-bottom: 20px;
+}
+
+button, input {
+  height: 35px;
+  border-radius: 8px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  margin: 2px;
+}
