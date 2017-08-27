@@ -71,3 +71,8 @@ button, input {
   border: 1px solid #ccc;
   margin: 2px;
 }
+
+p.pagination {
+  clear: both;
+  border-top: 2px solid #ccc;
+}

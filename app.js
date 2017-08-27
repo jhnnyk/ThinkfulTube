@@ -35,6 +35,16 @@ function displayYouTubeSearchData(data) {
 }
 
 function addPaginationLinks(data) {
+  // clear previous pagination links
+  $('.pagination').html('')
+
+  if (data.prevPageToken) {
+    PAGINATION.prevPage = data.prevPageToken
+    // display prev link
+    $('.pagination').append(`<a href="#" class="prev">Prev</a>`)
+    watchPagination()
+  }
+
   if (data.nextPageToken) {
     PAGINATION.nextPage = data.nextPageToken
     // display next link
@@ -48,6 +58,12 @@ function watchPagination() {
   $('.pagination .next').on('click', function(event) {
     event.preventDefault()
     SEARCH_PARAMS.pageToken = PAGINATION.nextPage
+    getDataFromAPI(displayYouTubeSearchData)
+  })
+
+  $('.pagination .prev').on('click', function(event) {
+    event.preventDefault()
+    SEARCH_PARAMS.pageToken = PAGINATION.prevPage
     getDataFromAPI(displayYouTubeSearchData)
   })
 }
