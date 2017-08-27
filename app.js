@@ -7,6 +7,7 @@ const SEARCH_PARAMS = {
   key: `${APIKey}`,
   type: 'video'
 }
+const PAGINATION = {}
 
 function getDataFromAPI(callback) {
   $.getJSON(YOUTUBE_SEARCH_URL, SEARCH_PARAMS, callback)
@@ -28,9 +29,27 @@ function renderResult(result) {
 
 function displayYouTubeSearchData(data) {
   console.log(data)
-  $('.js-search-results').before('<h2>Results</h2>')
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
+  addPaginationLinks(data)
+}
+
+function addPaginationLinks(data) {
+  if (data.nextPageToken) {
+    PAGINATION.nextPage = data.nextPageToken
+    // display next link
+    $('.pagination').append(`<a href="#" class="next">Next</a>`)
+    watchPagination()
+  }
+}
+
+function watchPagination() {
+  // add listener to pagination links that also sets the "pageToken" param
+  $('.pagination .next').on('click', function(event) {
+    event.preventDefault()
+    SEARCH_PARAMS.pageToken = PAGINATION.nextPage
+    getDataFromAPI(displayYouTubeSearchData)
+  })
 }
 
 function watchSubmit() {
@@ -38,10 +57,8 @@ function watchSubmit() {
     event.preventDefault()
     const queryTarget = $(event.currentTarget).find('.js-query')
     SEARCH_PARAMS.q = queryTarget.val()
-
     // reset the input
     queryTarget.val('')
-
     getDataFromAPI(displayYouTubeSearchData)
   })
 }
