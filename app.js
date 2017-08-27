@@ -2,16 +2,14 @@
 
 const APIKey = "AIzaSyBL06DgYp59dK1Bt0tUWBoQhusGNXRzKRI"
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+const SEARCH_PARAMS = {
+  part: 'snippet',
+  key: `${APIKey}`,
+  type: 'video'
+}
 
-function getDataFromAPI(searchTerm, callback) {
-  const params = {
-    part: 'snippet',
-    key: `${APIKey}`,
-    q: `${searchTerm}`,
-    type: 'video'
-  }
-
-  $.getJSON(YOUTUBE_SEARCH_URL, params, callback)
+function getDataFromAPI(callback) {
+  $.getJSON(YOUTUBE_SEARCH_URL, SEARCH_PARAMS, callback)
 }
 
 function renderResult(result) {
@@ -29,6 +27,7 @@ function renderResult(result) {
 }
 
 function displayYouTubeSearchData(data) {
+  console.log(data)
   $('.js-search-results').before('<h2>Results</h2>')
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
@@ -38,12 +37,12 @@ function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault()
     const queryTarget = $(event.currentTarget).find('.js-query')
-    const query = queryTarget.val()
+    SEARCH_PARAMS.q = queryTarget.val()
 
     // reset the input
     queryTarget.val('')
 
-    getDataFromAPI(query, displayYouTubeSearchData)
+    getDataFromAPI(displayYouTubeSearchData)
   })
 }
 
