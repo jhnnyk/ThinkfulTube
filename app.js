@@ -41,14 +41,14 @@ function addPaginationLinks(data) {
   if (data.prevPageToken) {
     PAGINATION.prevPage = data.prevPageToken
     // display prev link
-    $('.pagination').append(`<a href="#" class="prev">Prev</a>`)
+    $('.pagination').append(`<a href="#" class="prev">&larr; Prev</a>`)
     watchPagination()
   }
 
   if (data.nextPageToken) {
     PAGINATION.nextPage = data.nextPageToken
     // display next link
-    $('.pagination').append(`<a href="#" class="next">Next</a>`)
+    $('.pagination').append(`<a href="#" class="next">Next &rarr;</a>`)
     watchPagination()
   }
 }
