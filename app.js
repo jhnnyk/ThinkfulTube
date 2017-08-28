@@ -29,6 +29,7 @@ function renderResult(result) {
 
 function displayYouTubeSearchData(data) {
   console.log(data)
+  $('.js-results-header').html(`${data.pageInfo.totalResults} Results`)
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results)
   addPaginationLinks(data)
