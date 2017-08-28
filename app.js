@@ -29,9 +29,9 @@ function renderResult(result) {
 
 function displayYouTubeSearchData(data) {
   console.log(data)
-  $('.js-results-header').html(`${data.pageInfo.totalResults} Results`)
+  $('.js-results-header').html(`${data.pageInfo.totalResults} Results`).prop('hidden', false)
   const results = data.items.map((item, index) => renderResult(item))
-  $('.js-search-results').html(results)
+  $('.js-search-results').html(results).prop('hidden', false)
   addPaginationLinks(data)
 }
 
@@ -42,14 +42,14 @@ function addPaginationLinks(data) {
   if (data.prevPageToken) {
     PAGINATION.prevPage = data.prevPageToken
     // display prev link
-    $('.pagination').append(`<a href="#" class="prev">&larr; Prev</a>`)
+    $('.pagination').append(`<a href="#" class="prev">&larr; Prev</a>`).prop('hidden', false)
     watchPagination()
   }
 
   if (data.nextPageToken) {
     PAGINATION.nextPage = data.nextPageToken
     // display next link
-    $('.pagination').append(`<a href="#" class="next">Next &rarr;</a>`)
+    $('.pagination').append(`<a href="#" class="next">Next &rarr;</a>`).prop('hidden', false)
     watchPagination()
   }
 }

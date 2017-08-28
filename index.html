@@ -17,16 +17,16 @@
       <form action="#" class="js-search-form">
         <label for="query"></label>
         <input type="text" id="query" class="js-query">
-        <button type="submit">Search</button>
+        <button type="submit" aria-controls="search-results">Search</button>
       </form>
     </div>
   </header>
 
-  <main>
+  <main role="main">
     <div class="container">
-      <h2 class="js-results-header"></h2>
-      <ul class="js-search-results"></ul>
-      <p class="pagination"></p>
+      <h2 class="js-results-header" aria-live="polite" role="alert" hidden></h2>
+      <ul id="search-results" class="js-search-results" aria-live="polite" role="alert" hidden></ul>
+      <p class="pagination" aria-live="polite" hidden></p>
     </div>
   </main>
 
