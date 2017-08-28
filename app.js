@@ -14,7 +14,6 @@ function getDataFromAPI(callback) {
 }
 
 function renderResult(result) {
-  console.log(result)
   return `<li>
       <h3>${result.snippet.title}</h3>
       <p>
@@ -28,7 +27,6 @@ function renderResult(result) {
 }
 
 function displayYouTubeSearchData(data) {
-  console.log(data)
   $('.js-results-header').html(`${data.pageInfo.totalResults} Results`).prop('hidden', false)
   const results = data.items.map((item, index) => renderResult(item))
   $('.js-search-results').html(results).prop('hidden', false)
